@@ -28,16 +28,15 @@ fi
 
 # Start backend in background
 echo "▶️  Starting FastAPI backend on http://localhost:8000..."
-cd backend && uvicorn app.main:app --reload &
+(cd backend && uvicorn app.main:app --reload) &
 BACKEND_PID=$!
-cd ..
 
 # Give backend time to start
 sleep 2
 
 # Start frontend
 echo "▶️  Starting Next.js frontend on http://localhost:3000..."
-cd frontend && npm run dev &
+(cd frontend && npm run dev) &
 FRONTEND_PID=$!
 
 echo ""
