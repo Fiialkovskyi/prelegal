@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Mutual Non-Disclosure Agreement",
+    "description": "Mutual NDA template for protecting confidential information when both parties need protection",
+    "filename": "Mutual-NDA.md"
+  },
+  {
+    "name": "Mutual NDA Cover Page",
+    "description": "Cover page for the Mutual NDA template",
+    "filename": "Mutual-NDA-coverpage.md"
+  },
+  {
+    "name": "Cloud Service Agreement",
+    "description": "CSA template for defining terms and conditions for cloud computing services",
+    "filename": "CSA.md"
+  },
+  {
+    "name": "Service Level Agreement",
+    "description": "SLA template for specifying service performance standards and metrics",
+    "filename": "sla.md"
+  },
+  {
+    "name": "Data Processing Agreement",
+    "description": "DPA template for compliance with GDPR and data protection regulations",
+    "filename": "DPA.md"
+  },
+  {
+    "name": "Design Partner Agreement",
+    "description": "Agreement template for design partnership and collaboration arrangements",
+    "filename": "design-partner-agreement.md"
+  },
+  {
+    "name": "Professional Services Agreement",
+    "description": "PSA template for defining scope, deliverables, and terms for professional services",
+    "filename": "psa.md"
+  },
+  {
+    "name": "Partnership Agreement",
+    "description": "General partnership agreement template for business partnerships and joint ventures",
+    "filename": "Partnership-Agreement.md"
+  },
+  {
+    "name": "Business Associate Agreement",
+    "description": "BAA template for HIPAA compliance in healthcare-related arrangements",
+    "filename": "BAA.md"
+  },
+  {
+    "name": "Software License Agreement",
+    "description": "Template for licensing software and defining usage rights and restrictions",
+    "filename": "Software-License-Agreement.md"
+  },
+  {
+    "name": "Pilot Agreement",
+    "description": "Template for pilot programs and testing arrangements with defined duration and terms",
+    "filename": "Pilot-Agreement.md"
+  },
+  {
+    "name": "AI Addendum",
+    "description": "Addendum template for incorporating AI-related terms into existing agreements",
+    "filename": "AI-Addendum.md"
+  }
+]
