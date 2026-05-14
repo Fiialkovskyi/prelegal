@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+const API_BASE = "http://localhost:8000";
+
 interface FormField {
   name: string;
   value: string;
@@ -47,7 +49,7 @@ export function MutualNDAForm({
 
   const fetchTemplate = async () => {
     try {
-      const response = await fetch(`/api/v1/templates/${templateId}/schema`);
+      const response = await fetch(`${API_BASE}/api/v1/templates/${templateId}/schema`);
       if (!response.ok) throw new Error("Failed to fetch template");
       const templateData = await response.json();
       setTemplate(templateData);
@@ -70,7 +72,7 @@ export function MutualNDAForm({
 
     try {
       const response = await fetch(
-        `/api/v1/templates/${templateId}/content`
+        `${API_BASE}/api/v1/templates/${templateId}/content`
       );
       if (!response.ok) return;
       const data = await response.json();
@@ -115,14 +117,14 @@ export function MutualNDAForm({
       );
 
       if (documentId) {
-        await fetch(`/api/documents/${documentId}`, {
+        await fetch(`${API_BASE}/api/documents/${documentId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
           body: JSON.stringify({ name: documentName, content }),
         });
       } else {
-        await fetch("/api/documents", {
+        await fetch(`${API_BASE}/api/documents`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -145,7 +147,7 @@ export function MutualNDAForm({
   const handleDownloadPDF = async () => {
     try {
       const response = await fetch(
-        `/api/v1/templates/${templateId}/pdf`,
+        `${API_BASE}/api/v1/templates/${templateId}/pdf`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

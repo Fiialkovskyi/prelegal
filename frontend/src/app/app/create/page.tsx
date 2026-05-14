@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+const API_BASE = "http://localhost:8000";
+
 interface Template {
   id: string;
   name: string;
@@ -20,7 +22,7 @@ export default function CreatePage() {
 
   const fetchTemplates = async () => {
     try {
-      const response = await fetch("/api/v1/templates");
+      const response = await fetch(`${API_BASE}/api/v1/templates`);
       if (response.ok) {
         const data = await response.json();
         setTemplates(data);

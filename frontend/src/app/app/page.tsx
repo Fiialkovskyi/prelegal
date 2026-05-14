@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+const API_BASE = "http://localhost:8000";
+
 interface Document {
   id: number;
   name: string;
@@ -21,7 +23,7 @@ export default function AppHome() {
 
   const fetchRecentDocuments = async () => {
     try {
-      const response = await fetch("/api/documents", {
+      const response = await fetch(`${API_BASE}/api/documents`, {
         credentials: "include",
       });
       if (response.ok) {

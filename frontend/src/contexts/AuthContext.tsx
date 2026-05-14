@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
+const API_BASE = "http://localhost:8000";
+
 interface User {
   id: number;
   email: string;
@@ -30,7 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch("/api/auth/me", {
+      const response = await fetch(`${API_BASE}/api/auth/me`, {
         credentials: "include",
       });
       if (response.ok) {
@@ -45,7 +47,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signup = async (email: string, password: string) => {
-    const response = await fetch("/api/auth/signup", {
+    const response = await fetch(`${API_BASE}/api/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -59,7 +61,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signin = async (email: string, password: string) => {
-    const response = await fetch("/api/auth/signin", {
+    const response = await fetch(`${API_BASE}/api/auth/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
@@ -73,7 +75,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signout = async () => {
-    await fetch("/api/auth/signout", {
+    await fetch(`${API_BASE}/api/auth/signout`, {
       method: "POST",
       credentials: "include",
     });

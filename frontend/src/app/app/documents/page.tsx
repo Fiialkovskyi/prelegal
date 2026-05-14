@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+const API_BASE = "http://localhost:8000";
+
 interface Document {
   id: number;
   name: string;
@@ -23,7 +25,7 @@ export default function DocumentsPage() {
 
   const fetchDocuments = async () => {
     try {
-      const response = await fetch("/api/documents", {
+      const response = await fetch(`${API_BASE}/api/documents`, {
         credentials: "include",
       });
       if (response.ok) {
@@ -42,7 +44,7 @@ export default function DocumentsPage() {
 
     setIsDeleting(docId);
     try {
-      await fetch(`/api/documents/${docId}`, {
+      await fetch(`${API_BASE}/api/documents/${docId}`, {
         method: "DELETE",
         credentials: "include",
       });

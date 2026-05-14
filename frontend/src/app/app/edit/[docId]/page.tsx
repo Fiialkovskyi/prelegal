@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { MutualNDAForm } from "@/components/MutualNDAForm";
 
+const API_BASE = "http://localhost:8000";
+
 interface Document {
   id: number;
   name: string;
@@ -22,7 +24,7 @@ export default function EditPage({ params }: { params: { docId: string } }) {
 
   const fetchDocument = async () => {
     try {
-      const response = await fetch(`/api/documents/${params.docId}`, {
+      const response = await fetch(`${API_BASE}/api/documents/${params.docId}`, {
         credentials: "include",
       });
       if (response.ok) {
