@@ -1,10 +1,17 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 
 from app.core import catalog
 from app.database import init_db
-from app.api.routes import templates, auth, documents
+from app.api.routes import templates, auth, documents, chat
+
+# Load .env from project root when running locally (not needed in Docker with env vars)
+_env_path = Path(__file__).resolve().parents[2] / ".env"
+if _env_path.exists():
+    load_dotenv(_env_path)
 
 
 @asynccontextmanager
@@ -38,6 +45,7 @@ app.add_middleware(
 app.include_router(templates.router)
 app.include_router(auth.router)
 app.include_router(documents.router)
+app.include_router(chat.router)
 
 
 @app.get("/health")
