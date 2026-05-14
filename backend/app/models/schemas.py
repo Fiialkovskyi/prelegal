@@ -40,16 +40,3 @@ class TemplateSchema(BaseModel):
 
 class RenderRequest(BaseModel):
     values: dict[str, str]
-    strict: bool = False
-
-
-class RenderResponse(BaseModel):
-    html: str
-    variables_used: list[str]
-    variables_missing: list[str]
-
-
-class BundleRenderRequest(BaseModel):
-    filenames: list[str]
-    values: dict[str, str]
-    strict: bool = False

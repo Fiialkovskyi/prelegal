@@ -2,7 +2,13 @@
 
 set -e
 
-echo "🚀 Starting Prelegal..."
+echo "🚀 Starting Prelegal (macOS)..."
+
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_DIR="$( dirname "$SCRIPT_DIR" )"
+
+cd "$PROJECT_DIR"
 
 # Create and activate virtual environment if it doesn't exist
 if [ ! -d "venv" ]; then

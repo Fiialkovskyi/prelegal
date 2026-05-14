@@ -26,15 +26,4 @@ export interface TemplateSchema {
   related_filenames: string[];
 }
 
-export interface RenderRequest {
-  values: Record<string, string>;
-  strict?: boolean;
-}
-
-export interface RenderResponse {
-  html: string;
-  variables_used: string[];
-  variables_missing: string[];
-}
-
 export type FieldValues = Record<string, string>;
