@@ -1,5 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi import APIRouter, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 
 from app.database import get_db
@@ -16,7 +15,7 @@ router = APIRouter(prefix="/api/auth", tags=["auth"])
 
 
 @router.post("/signup", response_model=UserResponse)
-def signup(user_data: UserSignUp, db: Session = Depends(get_db)):
+def signup(user_data: UserSignUp, response: Response, db: Session = Depends(get_db)):
     """Create a new user account."""
     existing_user = db.query(User).filter(User.email == user_data.email).first()
     if existing_user:
@@ -30,13 +29,6 @@ def signup(user_data: UserSignUp, db: Session = Depends(get_db)):
 
     # Create and set access token in response
     access_token = create_access_token(new_user.id)
-    response = JSONResponse(
-        content={
-            "id": new_user.id,
-            "email": new_user.email,
-            "created_at": new_user.created_at.isoformat(),
-        }
-    )
     response.set_cookie(
         key="access_token",
         value=access_token,
@@ -44,11 +36,11 @@ def signup(user_data: UserSignUp, db: Session = Depends(get_db)):
         secure=False,  # Set to True in production with HTTPS
         samesite="lax",
     )
-    return response
+    return new_user
 
 
 @router.post("/signin", response_model=UserResponse)
-def signin(user_data: UserSignIn, db: Session = Depends(get_db)):
+def signin(user_data: UserSignIn, response: Response, db: Session = Depends(get_db)):
     """Sign in with email and password."""
     user = db.query(User).filter(User.email == user_data.email).first()
     if not user or not verify_password(user_data.password, user.hashed_password):
@@ -56,13 +48,6 @@ def signin(user_data: UserSignIn, db: Session = Depends(get_db)):
 
     # Create and set access token in response
     access_token = create_access_token(user.id)
-    response = JSONResponse(
-        content={
-            "id": user.id,
-            "email": user.email,
-            "created_at": user.created_at.isoformat(),
-        }
-    )
     response.set_cookie(
         key="access_token",
         value=access_token,
@@ -70,7 +55,7 @@ def signin(user_data: UserSignIn, db: Session = Depends(get_db)):
         secure=False,  # Set to True in production with HTTPS
         samesite="lax",
     )
-    return response
+    return user
 
 
 @router.post("/signout")
