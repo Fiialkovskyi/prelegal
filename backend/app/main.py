@@ -3,12 +3,14 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core import catalog
-from app.api.routes import templates
+from app.database import init_db
+from app.api.routes import templates, auth, documents
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
+    init_db()
     catalog.load_catalog()
     yield
     # Shutdown
@@ -23,9 +25,10 @@ app = FastAPI(
 )
 
 # Add CORS middleware
+# In production, replace ["*"] with specific origins like ["https://yourdomain.com"]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure this based on your frontend URL in production
+    allow_origins=["http://localhost:3000", "http://localhost:8000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -33,6 +36,8 @@ app.add_middleware(
 
 # Include routers
 app.include_router(templates.router)
+app.include_router(auth.router)
+app.include_router(documents.router)
 
 
 @app.get("/health")
